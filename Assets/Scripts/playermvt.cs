@@ -14,23 +14,9 @@ public class playermvt : MonoBehaviour
     private float turningvelocity;
     
     Vector3 movdir;
-    [SerializeField] GameObject body;
-    public bool die = false;
-    public bool readytobepushed = true;
     
-    public bool issafe;
-    [SerializeField]Image panelpush;
-    Vector3 firstpos;
 
-    public float pushForce = 3f;         // Strength of the push
-    public float pushRange = 2f;         // How far the player can reach
-    public LayerMask botLayer;
-    public AnimationClip clip;
 
-    private void Awake()
-    {
-        firstpos = transform.position;
-    }
 
     // Start is called before the first frame update
     void Start()
