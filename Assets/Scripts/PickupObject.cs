@@ -1,18 +1,18 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody),typeof(Collider))]
+[RequireComponent(typeof(Rigidbody),typeof(BoxCollider))]
 
 
 public class PickupObject : MonoBehaviour
 {
 
-    
+    [SerializeField] Material highlightMaterial;
     [Header("Float Settings")]
     [SerializeField] private float floatAmplitude = 1f;
     [SerializeField] private float floatSpeed = 1.5f;
 
     [Header("Rotation Settings")]
-    [HideInInspector]public bool rotateObject = true;
+    [HideInInspector] public bool rotateObject = true;
     [SerializeField] private Vector3 rotationSpeed = new Vector3(20f, 0f, 0f);
 
     private Vector3 startPosition;
@@ -23,6 +23,7 @@ public class PickupObject : MonoBehaviour
     {
         startPosition = transform.position;
             originalScale = transform.localScale;
+        GetComponent<MeshRenderer>().materials.SetValue(highlightMaterial, GetComponent<MeshRenderer>().materials.Length-1);
     }
 
     private void Update()
