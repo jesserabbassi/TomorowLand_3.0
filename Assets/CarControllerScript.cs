@@ -7,6 +7,7 @@ public class CarEnterExit : MonoBehaviour
     public Transform exitPoint;
     public float fuel = 100f;
     public float fuelSpeed = 0.1f;
+    public float fallbackExitDistance = 4f;
     public Slider fuelBar;
 
     private GameObject player;
@@ -32,7 +33,7 @@ public class CarEnterExit : MonoBehaviour
         }
 
         // FUEL CONSUMPTION
-        if (isInCar && prometeoCarController.carSpeed > 0.1f)
+        if (isInCar && prometeoCarController != null && prometeoCarController.carSpeed > 0.1f)
         {
             fuel -= prometeoCarController.carSpeed * Time.deltaTime * fuelSpeed;
             fuel = Mathf.Clamp(fuel, 0f, 100f);
@@ -49,7 +50,7 @@ public class CarEnterExit : MonoBehaviour
 
     void EnterCar()
     {
-        if (player == null) return;
+        if (player == null || prometeoCarController == null) return;
 
         prometeoCarController.enabled = true;
         isInCar = true;
@@ -65,11 +66,7 @@ public class CarEnterExit : MonoBehaviour
             mesh.enabled = false;
 
         // Attach player to car
-        player.transform.SetParent(transform);
-       
-
-
-        // Enable car control
+        player.transform.SetParent(prometeoCarController.transform, true);
     }
 
     void ExitCar()
@@ -77,6 +74,17 @@ public class CarEnterExit : MonoBehaviour
         if (player == null) return;
 
         isInCar = false;
+
+        CharacterController characterController = player.GetComponent<CharacterController>();
+        if (characterController != null)
+            characterController.enabled = false;
+
+        // Detach player before moving them out of the car.
+        player.transform.SetParent(null, true);
+        player.transform.position = GetExitPosition();
+
+        if (characterController != null)
+            characterController.enabled = true;
 
         // Enable player movement
         var movement = player.GetComponent<playermvt>();
@@ -88,14 +96,20 @@ public class CarEnterExit : MonoBehaviour
         if (mesh != null)
             mesh.enabled = true;
 
-        // Detach player
-        player.transform.SetParent(null);
-
-        // Move player to exit point
-        player.transform.position = transform.position;
-
         // Disable car control
-        prometeoCarController.enabled = false;
+        if (prometeoCarController != null)
+            prometeoCarController.enabled = false;
+
+        isNearCar = false;
+    }
+
+    Vector3 GetExitPosition()
+    {
+        if (exitPoint != null && exitPoint != transform)
+            return exitPoint.position;
+
+        Transform carTransform = prometeoCarController != null ? prometeoCarController.transform : transform;
+        return carTransform.position + carTransform.right * fallbackExitDistance;
     }
 
     void OnTriggerEnter(Collider other)
