@@ -51,6 +51,7 @@ public class CarEnterExit : MonoBehaviour
     {
         if (player == null) return;
 
+        prometeoCarController.enabled = true;
         isInCar = true;
 
         // Disable player movement
@@ -65,9 +66,10 @@ public class CarEnterExit : MonoBehaviour
 
         // Attach player to car
         player.transform.SetParent(transform);
+       
+
 
         // Enable car control
-        prometeoCarController.enabled = true;
     }
 
     void ExitCar()
@@ -90,10 +92,7 @@ public class CarEnterExit : MonoBehaviour
         player.transform.SetParent(null);
 
         // Move player to exit point
-        if (exitPoint != null)
-            player.transform.position = exitPoint.position;
-        else
-            player.transform.position = transform.position + new Vector3(3, 0, 0);
+        player.transform.position = transform.position;
 
         // Disable car control
         prometeoCarController.enabled = false;
