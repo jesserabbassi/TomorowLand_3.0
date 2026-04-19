@@ -5,7 +5,7 @@ using System.Collections;
 public class CarRepairTrigger : MonoBehaviour
 {
     public GameObject repairUI;
-    
+    public CarToRepair carToRepair;
     public float repairTime = 3f;
 
     private bool playerInside = false;
@@ -19,7 +19,7 @@ public class CarRepairTrigger : MonoBehaviour
 
     void Update()
     {
-        if (playerInside && Input.GetKeyDown(KeyCode.E) && !isRepairing)
+        if (playerInside && Input.GetKeyDown(KeyCode.E) && !isRepairing && !carToRepair.isRepaired)
         {
             StartCoroutine(RepairProcess());
         }
@@ -47,6 +47,7 @@ public class CarRepairTrigger : MonoBehaviour
 
         repairUI.SetActive(false);
         isRepairing = false;
+        carToRepair.Repair(FindFirstObjectByType<PlayerPick>().heldObj);
     }
 
     void OnTriggerEnter(Collider other)

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PickupObject : MonoBehaviour
 {
 
-    [SerializeField] Material highlightMaterial;
+    
     [Header("Float Settings")]
     [SerializeField] private float floatAmplitude = 1f;
     [SerializeField] private float floatSpeed = 1.5f;
@@ -23,7 +23,7 @@ public class PickupObject : MonoBehaviour
     {
         startPosition = transform.position;
             originalScale = transform.localScale;
-        GetComponent<MeshRenderer>().materials.SetValue(highlightMaterial, GetComponent<MeshRenderer>().materials.Length-1);
+        
     }
 
     private void Update()
