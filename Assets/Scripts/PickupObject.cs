@@ -33,7 +33,7 @@ public class PickupObject : MonoBehaviour
             return;
         }
         float newY = startPosition.y + Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
-        transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
         transform.Rotate(rotationSpeed * Time.deltaTime);
     }
 }
