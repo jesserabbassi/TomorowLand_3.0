@@ -1,0 +1,38 @@
+.full-screen {
+    flex-grow: 1;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+    background-image: url("project://database/Assets/UI%20Main%20Menu/Screenshot%202026-04-19%20043713.png?fileID=2800000&guid=5c26c819061fafa4e904b8b6db06cb02&type=3#Screenshot 2026-04-19 043713");
+    -unity-background-scale-mode: scale-and-crop;
+    -unity-background-image-tint-color: rgba(56, 56, 56, 0.34);
+    background-color: rgb(53, 53, 53);
+}
+
+.game-title {
+    font-size: 60px;
+    color: rgb(0, 255, 255);
+    -unity-font-style: bold;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    -unity-text-align: middle-center;
+    align-self: center;
+}
+
+.menu-btn {
+    width: 300px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-width: 1px;
+    border-color: rgb(0, 255, 255);
+    color: white;
+    margin-bottom: 15px;
+    transition-duration: 0.2s;
+    border-radius: 0;
+}
+
+.menu-btn:hover {
+    background-color: rgb(0, 255, 255);
+    color: rgb(16, 16, 16);
+    scale: 1.05;
+}
