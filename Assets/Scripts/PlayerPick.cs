@@ -31,7 +31,7 @@ public class PlayerPick : MonoBehaviour
             heldObj.transform.SetParent(null);
             heldObj.GetComponent<Rigidbody>().isKinematic = false;
             heldObj.GetComponent<Collider>().enabled = true;
-            heldObj.GetComponent<Rigidbody>().AddForce(transform.forward * 3f, ForceMode.Impulse);
+            heldObj.GetComponent<Rigidbody>().AddForce(transform.forward * 3f*Time.smoothDeltaTime, ForceMode.Impulse);
             heldObj.GetComponent<PickupObject>().transform.localScale = heldObj.GetComponent<PickupObject>().originalScale;
             heldObj = null;
         }
