@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Help/HelpMenuStyle.uss?fileID=7433441132597879392&amp;guid=218cc5cabe81a9f43a52bcd290b5af23&amp;type=3#HelpMenuStyle"/>
+    <ui:VisualElement name="HelpPanel" class="help-background" style="top: -8px; bottom: -4px; right: 0; left: 0; border-left-color: rgb(97, 92, 92); border-right-color: rgb(97, 92, 92); border-top-color: rgb(97, 92, 92); border-bottom-color: rgb(97, 92, 92);">
+        <ui:Label text="HOW TO PLAY:&#10;&#10;-W, A, S, D TO MOVE&#10;-E TO INTERACT WITH ELEMENTS&#10;-YOUR GOAL IS TO COLLECT TOOLS IN ORDER TO REPAIR CARS AND EARN MONEY BEFORE TIME RUNS OUT&#10;&#10;- Press &apos;H&apos; to close this menu" class="help-text" style="height: 415px;"/>
+    </ui:VisualElement>
+</ui:UXML>

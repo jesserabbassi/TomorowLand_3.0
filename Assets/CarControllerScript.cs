@@ -1,56 +1,110 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+using UnityEngine.UI;
 
 public class CarEnterExit : MonoBehaviour
 {
     public PrometeoCarController prometeoCarController;
     public Transform exitPoint;
+    public float fuel = 100f;
+    public float fuelSpeed = 0.1f;
+    public Slider fuelBar;
 
     private GameObject player;
-    private bool isInside = false;
+
+    // TRUE when player is in trigger zone (near car)
+    private bool isNearCar = false;
+
+    // TRUE when player is actually inside the car
+    private bool isInCar = false;
 
     void Update()
     {
-        if (isInside && Input.GetKeyDown(KeyCode.E))
+        // ENTER CAR
+        if (!isInCar && isNearCar && Input.GetKeyDown(KeyCode.E))
         {
             EnterCar();
         }
-        else if (!isInside && player != null && Input.GetKeyDown(KeyCode.F))
+
+        // EXIT CAR
+        if (isInCar && Input.GetKeyDown(KeyCode.F))
         {
             ExitCar();
+        }
+
+        // FUEL CONSUMPTION
+        if (isInCar && prometeoCarController.carSpeed > 0.1f)
+        {
+            fuel -= prometeoCarController.carSpeed * Time.deltaTime * fuelSpeed;
+            fuel = Mathf.Clamp(fuel, 0f, 100f);
+
+            if (fuelBar != null)
+                fuelBar.value = fuel / 100f;
+
+            if (fuel <= 0f)
+            {
+                prometeoCarController.enabled = false;
+            }
         }
     }
 
     void EnterCar()
     {
-        player.GetComponent<playermvt>().enabled = false;
-        player.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-        player.transform.SetParent(transform);
-       // player.SetActive(false); // hide player
-        prometeoCarController.enabled = true;
+        if (player == null) return;
 
-        isInside = false;
+        isInCar = true;
+
+        // Disable player movement
+        var movement = player.GetComponent<playermvt>();
+        if (movement != null)
+            movement.enabled = false;
+
+        // Hide player mesh
+        var mesh = player.GetComponentInChildren<SkinnedMeshRenderer>();
+        if (mesh != null)
+            mesh.enabled = false;
+
+        // Attach player to car
+        player.transform.SetParent(transform);
+
+        // Enable car control
+        prometeoCarController.enabled = true;
     }
 
     void ExitCar()
     {
-        player.transform.SetParent(null);
-        player.GetComponent<playermvt>().enabled = true;
-        player.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-        player.transform.position = new Vector3(5,0,0)+ prometeoCarController.transform.position;
-        
-      //  player.SetActive(true);
+        if (player == null) return;
 
+        isInCar = false;
+
+        // Enable player movement
+        var movement = player.GetComponent<playermvt>();
+        if (movement != null)
+            movement.enabled = true;
+
+        // Show player mesh
+        var mesh = player.GetComponentInChildren<SkinnedMeshRenderer>();
+        if (mesh != null)
+            mesh.enabled = true;
+
+        // Detach player
+        player.transform.SetParent(null);
+
+        // Move player to exit point
+        if (exitPoint != null)
+            player.transform.position = exitPoint.position;
+        else
+            player.transform.position = transform.position + new Vector3(3, 0, 0);
+
+        // Disable car control
         prometeoCarController.enabled = false;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hhhhhh");
         if (other.CompareTag("Player"))
         {
             player = other.gameObject;
-            isInside = true;
+            isNearCar = true;
         }
     }
 
@@ -58,7 +112,7 @@ public class CarEnterExit : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isInside = false;
+            isNearCar = false;
         }
     }
 }
