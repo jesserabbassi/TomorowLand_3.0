@@ -6,6 +6,7 @@ public class PlayerPick : MonoBehaviour
 {
     [HideInInspector] public GameObject heldObj=null;
     public Transform HeldPoint;
+    
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -29,7 +30,7 @@ public class PlayerPick : MonoBehaviour
         {
             heldObj.GetComponent<PickupObject>().rotateObject = true;
             heldObj.transform.SetParent(null);
-            heldObj.GetComponent<Rigidbody>().isKinematic = false;
+    
             heldObj.GetComponent<Collider>().enabled = true;
             heldObj.GetComponent<Rigidbody>().AddForce(transform.forward * 3f*Time.smoothDeltaTime, ForceMode.Impulse);
             heldObj.GetComponent<PickupObject>().transform.localScale = heldObj.GetComponent<PickupObject>().originalScale;

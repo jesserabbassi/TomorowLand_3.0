@@ -34,11 +34,11 @@ public class CarEnterExit : MonoBehaviour
 
     void ExitCar()
     {
+        player.transform.SetParent(null);
         player.GetComponent<playermvt>().enabled = true;
         player.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-        player.transform.SetParent(null);
-        exitPoint.position = new Vector3(5,0,0)+transform.position;
-        player.transform.position = exitPoint.position;
+        player.transform.position = new Vector3(5,0,0)+ prometeoCarController.transform.position;
+        
       //  player.SetActive(true);
 
         prometeoCarController.enabled = false;

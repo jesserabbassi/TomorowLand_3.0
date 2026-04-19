@@ -7,6 +7,7 @@ public class CarRepairTrigger : MonoBehaviour
     public GameObject repairUI;
     public CarToRepair carToRepair;
     public float repairTime = 3f;
+    public AudioClip repairSound, successSound;
 
     private bool playerInside = false;
     private bool isRepairing = false;
@@ -32,6 +33,7 @@ public class CarRepairTrigger : MonoBehaviour
 
         float elapsed = 0f;
 
+        FindFirstObjectByType<playermvt>().PlayRepairSound(repairSound);
         while (elapsed < repairTime)
         {
             elapsed += Time.deltaTime;
@@ -43,6 +45,7 @@ public class CarRepairTrigger : MonoBehaviour
             yield return null;
         }
 
+        FindFirstObjectByType<playermvt>().PlayRepairSound(successSound);
         repairUI.GetComponent<Slider>().value = 1f;
 
         repairUI.SetActive(false);

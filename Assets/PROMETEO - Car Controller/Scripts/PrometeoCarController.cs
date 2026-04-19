@@ -18,8 +18,9 @@ public class PrometeoCarController : MonoBehaviour
 {
 
     //CAR SETUP
+    public AudioClip breakSound;
 
-      [Space(20)]
+    [Space(20)]
       //[Header("CAR SETUP")]
       [Space(10)]
       [Range(20, 190)]
@@ -43,7 +44,7 @@ public class PrometeoCarController : MonoBehaviour
       [Space(10)]
       public Vector3 bodyMassCenter; // This is a vector that contains the center of mass of the car. I recommend to set this value
                                     // in the points x = 0 and z = 0 of your car. You can select the value that you want in the y axis,
-                                    // however, you must notice that the higher this value is, the more unstable the car becomes.
+                                // however, you must notice that the higher this value is, the more unstable the car becomes.
                                     // Usually the y value goes from 0 to 1.5.
 
     //WHEELS
@@ -348,7 +349,8 @@ public class PrometeoCarController : MonoBehaviour
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
           Handbrake();
-        }
+          FindFirstObjectByType<playermvt>().PlayRepairSound(breakSound);
+            }
         if(Input.GetKeyUp(KeyCode.Space)){
           RecoverTraction();
         }

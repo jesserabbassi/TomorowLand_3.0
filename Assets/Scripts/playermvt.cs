@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+[RequireComponent(typeof(AudioSource))]
 
 public class playermvt : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class playermvt : MonoBehaviour
     private float turningvelocity;
     
     Vector3 movdir;
+    AudioSource AudioSource;
     
+
 
 
 
@@ -24,9 +27,9 @@ public class playermvt : MonoBehaviour
         Cursor.visible = false;
         ctr = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-        
-        
-        
+        AudioSource = GetComponent<AudioSource>();
+
+
     }
 
     // Update is called once per frame
@@ -71,9 +74,15 @@ public class playermvt : MonoBehaviour
     
     
     
+    public void PlayRepairSound(AudioClip audio)
+    {
+        if (AudioSource != null && audio != null)
+        {
+            AudioSource.PlayOneShot(audio);
+        }
+    }
 
 
-   
 
 
 

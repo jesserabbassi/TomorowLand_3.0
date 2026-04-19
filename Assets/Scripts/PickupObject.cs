@@ -23,7 +23,9 @@ public class PickupObject : MonoBehaviour
     {
         startPosition = transform.position;
             originalScale = transform.localScale;
-        
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+
     }
 
     private void Update()
