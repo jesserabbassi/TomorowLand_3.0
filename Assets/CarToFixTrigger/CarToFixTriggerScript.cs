@@ -5,11 +5,17 @@ using System.Collections;
 public class CarRepairTrigger : MonoBehaviour
 {
     public GameObject repairUI;
-    public Slider progressBar;
+    
     public float repairTime = 3f;
 
     private bool playerInside = false;
     private bool isRepairing = false;
+
+    private void Start()
+    {
+        
+        repairUI.SetActive(false);
+    }
 
     void Update()
     {
@@ -32,12 +38,12 @@ public class CarRepairTrigger : MonoBehaviour
 
             float t = elapsed / repairTime;
 
-            progressBar.value = Mathf.Lerp(0, 1, t);
+            repairUI.GetComponent<Slider>().value = Mathf.Lerp(0, 1, t);
 
             yield return null;
         }
 
-        progressBar.value = 1f;
+        repairUI.GetComponent<Slider>().value = 1f;
 
         repairUI.SetActive(false);
         isRepairing = false;
