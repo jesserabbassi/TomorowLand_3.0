@@ -3,10 +3,10 @@
     <ui:VisualElement name="Background" class="full-screen" style="flex-direction: column-reverse; width: 1984px; background-image: url(&quot;project://database/Assets/UI%20Main%20Menu/Screenshot%202026-04-19%20043713.png?fileID=2800000&amp;guid=5c26c819061fafa4e904b8b6db06cb02&amp;type=3#Screenshot 2026-04-19 043713&quot;);">
         <ui:VisualElement name="MenuContainer" class="menu-container">
             <ui:VisualElement name="ButtonList" class="button-list">
-                <ui:Button name="StartBtn" text="PLAY" class="menu-btn"/>
-                <ui:Button name="GarageBtn" text="THE GARAGE" class="menu-btn" style="border-left-color: rgb(226, 112, 42); border-right-color: rgb(226, 112, 42); border-top-color: rgb(226, 112, 42); border-bottom-color: rgb(226, 112, 42);"/>
+                <ui:Button name="PlayButton" text="PLAY" class="menu-btn"/>
+                <ui:Button name="GarageBtn" text="THE GARAGE" class="menu-btn" style="border-left-color: rgb(24, 152, 150); border-right-color: rgb(24, 152, 150); border-top-color: rgb(24, 152, 150); border-bottom-color: rgb(24, 152, 150);"/>
                 <ui:Button name="SettingsBtn" text="DIAGNOSTICS" class="menu-btn"/>
-                <ui:Button name="ExitBtn" text="EXIT" class="menu-btn"/>
+                <ui:Button name="ExitButton" text="EXIT" class="menu-btn"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:Label text="Aam Gaddour" class="game-title" style="width: 430px; height: 67px; color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&amp;guid=74a5091d8707f334b9a5c31ef71a64ba&amp;type=3#PerfectDOSVGA437&quot;);"/>
