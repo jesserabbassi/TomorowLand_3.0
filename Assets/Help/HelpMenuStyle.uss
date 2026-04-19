@@ -1,0 +1,24 @@
+.help-background {
+    /* Absolute position makes it float over everything else */
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    
+    /* Dark semi-transparent overlay to block out the main menu */
+    background-color: rgba(0, 0, 0, 0.9); 
+    
+    /* Center the text inside */
+    justify-content: center;
+    align-items: center;
+}
+
+.help-text {
+    color: white;
+    font-size: 25px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    /* Adding some spacing between lines */
+    white-space: normal; 
+}
