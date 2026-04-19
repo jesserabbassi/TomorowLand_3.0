@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class playermvt : MonoBehaviour
 {
-    public float speed = 6f, gravity = 10f;
+    public float speed = 6f, gravity = 10f,jumpforce = 8f;
     public float smoothtime = 0.1f;
     CharacterController ctr;
     public Transform cam;
@@ -41,14 +41,14 @@ public class playermvt : MonoBehaviour
 
 
 
-        movdir.y -= gravity;
+        movdir.y -= gravity*Time.deltaTime;
         if (h != 0 || v != 0)
         {
             float targetang = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float ang = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetang, ref turningvelocity, smoothtime);
             transform.rotation = Quaternion.Euler(0, ang, 0);
             anim.SetBool("run", true);
-            movdir = Quaternion.Euler(0, targetang, 0) * Vector3.forward;
+            movdir = Quaternion.Euler(0, targetang, 0) * Vector3.forward+movdir.y*Vector3.up;
 
 
 
@@ -60,9 +60,14 @@ public class playermvt : MonoBehaviour
             movdir.x = 0f;
             movdir.z = 0f;
         }
+
+
+
+
         ctr.Move(movdir * speed * Time.deltaTime);
 
     }
+
     
     
     
